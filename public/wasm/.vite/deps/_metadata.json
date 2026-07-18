@@ -1,0 +1,25 @@
+{
+  "hash": "32ac8bca",
+  "configHash": "bbba6d5e",
+  "lockfileHash": "3dd81548",
+  "browserHash": "d0fd61b7",
+  "optimized": {
+    "@huggingface/transformers": {
+      "src": "../../@huggingface/transformers/dist/transformers.web.js",
+      "file": "@huggingface_transformers.js",
+      "fileHash": "d505ec86",
+      "needsInterop": false
+    },
+    "onnxruntime-web": {
+      "src": "../../onnxruntime-web/dist/ort.bundle.min.mjs",
+      "file": "onnxruntime-web.js",
+      "fileHash": "4097eff6",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-NSBPE2FW": {
+      "file": "chunk-NSBPE2FW.js"
+    }
+  }
+}

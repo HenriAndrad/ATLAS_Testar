@@ -1,5 +1,5 @@
 import * as ort from "onnxruntime-web";
-ort.env.wasm.wasmPaths = "/node_modules/onnxruntime-web/dist/";
+ort.env.wasm.wasmPaths = "./wasm/";
 
 class DetectorManager {
 
@@ -30,7 +30,13 @@ class DetectorManager {
 
     console.log("Carregando classes...");
 
-    const resposta = await fetch("./models/coco.names");
+    const base = import.meta.env.BASE_URL;
+
+    const resposta = await fetch(`${base}models/coco.names`);
+
+    if (!resposta.ok) {
+        throw new Error(`Não foi possível carregar coco.names (${resposta.status})`);
+    }
 
     const texto = await resposta.text();
 
