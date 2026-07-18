@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Visual Translator AI</title>
+
+
+  <script type="module" crossorigin src="/assets/index-WRJlrUCg.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-B4JzPkiP.css">
+</head>
+
+<body>
+
+    <!-- Tela de carregamento -->
+    <div id="loading-screen">
+
+        <div class="loader"></div>
+
+        <h2>Carregando Inteligência Artificial...</h2>
+
+        <p id="loading-text">Inicializando...</p>
+
+    </div>
+
+    <!-- Barra superior -->
+
+    <header>
+
+        <h1>Visual Translator AI</h1>
+
+        <select id="language-select">
+
+            <option value="pt">Português 🇧🇷</option>
+            <option value="en">English 🇺🇸</option>
+            <option value="es">Español 🇪🇸</option>
+            <option value="fr">Français 🇫🇷</option>
+            <option value="de">Deutsch 🇩🇪</option>
+
+        </select>
+
+    </header>
+
+    <!-- Área da câmera -->
+
+    <main>
+
+        <video
+            id="camera"
+            autoplay
+            muted
+            playsinline>
+        </video>
+
+        <canvas id="overlay"></canvas>
+
+        <div id="focus-box"></div>
+
+    </main>
+
+    <!-- Painel inferior -->
+
+    <footer>
+
+        <div class="result-card">
+
+            <span class="label">
+
+                Objeto Detectado
+
+            </span>
+
+            <h2 id="translated-name">
+
+                Aguardando...
+
+            </h2>
+
+            <h3 id="original-name">
+
+                —
+
+            </h3>
+
+            <p id="confidence">
+
+                Confiança: --
+
+            </p>
+
+        </div>
+
+        <div class="buttons">
+
+            <button id="btn-speak">
+
+                🔊 Ouvir
+
+            </button>
+
+            <button id="btn-freeze">
+
+                ⏸ Congelar
+
+            </button>
+
+            <button id="btn-camera">
+
+                📷 Trocar câmera
+
+            </button>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
