@@ -81,4 +81,8 @@ const dictionary = {
   toothbrush: "Escova de Dentes"
 };
 
+export function traduzirLocal(texto) {
+    return dictionary[texto] || texto;
+}
+
 export default dictionary;

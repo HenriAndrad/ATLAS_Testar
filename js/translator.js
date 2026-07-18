@@ -1,44 +1,19 @@
-import { pipeline } from "@huggingface/transformers";
 import {
-    traduzirLocal,
-    adicionarTraducao
+    traduzirLocal
 } from "./dictionary.js";
 
 class TranslatorManager {
 
     constructor() {
 
-        this.pipeline = null;
-
         this.cache = new Map();
-
-        this.modeloCarregado = false;
-
         this.idiomaDestino = "pt";
 
     }
 
     async iniciar() {
 
-        try {
-            console.log("Iniciando download do modelo...");
-            this.pipeline = await pipeline(
-                "translation",
-                "Xenova/nllb-200-distilled-600M"
-            );
-
-            this.modeloCarregado = true;
-            console.log("Modelo carregado.");
-        }
-
-        catch (erro) {
-
-    console.error("Erro ao carregar o tradutor:");
-    console.error(erro);
-
-    this.modeloCarregado = false;
-
-}
+        console.log("Tradutor local iniciado.");
 
         return this;
 
@@ -62,69 +37,11 @@ class TranslatorManager {
 
         }
 
-        const local = traduzirLocal(texto);
+        const traducao = traduzirLocal(texto);
 
-        if (local !== texto) {
+        this.cache.set(chave, traducao);
 
-            this.cache.set(chave, local);
-
-            return local;
-
-        }
-
-        if (!this.modeloCarregado) {
-
-            return texto;
-
-        }
-
-        try {
-
-            const resultado = await this.pipeline(texto, {
-
-                src_lang: "eng_Latn",
-
-                tgt_lang: this.obterCodigoIdioma()
-
-            });
-
-            const traducao = resultado[0].translation_text;
-
-            adicionarTraducao(texto, traducao);
-
-            this.cache.set(chave, traducao);
-
-            return traducao;
-
-        }
-
-        catch (erro) {
-
-            console.error(erro);
-
-            return texto;
-
-        }
-
-    }
-
-    obterCodigoIdioma() {
-
-        const idiomas = {
-
-            pt: "por_Latn",
-
-            en: "eng_Latn",
-
-            es: "spa_Latn",
-
-            fr: "fra_Latn",
-
-            de: "deu_Latn"
-
-        };
-
-        return idiomas[this.idiomaDestino] || "por_Latn";
+        return traducao;
 
     }
 
