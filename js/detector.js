@@ -1,5 +1,5 @@
 import * as ort from "onnxruntime-web";
-ort.env.wasm.wasmPaths = "./wasm/";
+ort.env.wasm.wasmPaths = `${import.meta.env.BASE_URL}wasm/`;
 
 class DetectorManager {
 
