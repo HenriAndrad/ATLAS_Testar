@@ -21,23 +21,24 @@ class TranslatorManager {
     async iniciar() {
 
         try {
-
+            console.log("Iniciando download do modelo...");
             this.pipeline = await pipeline(
                 "translation",
                 "Xenova/nllb-200-distilled-600M"
             );
 
             this.modeloCarregado = true;
-
+            console.log("Modelo carregado.");
         }
 
         catch (erro) {
 
-            console.warn("Transformers.js indisponível.");
+    console.error("Erro ao carregar o tradutor:");
+    console.error(erro);
 
-            this.modeloCarregado = false;
+    this.modeloCarregado = false;
 
-        }
+}
 
         return this;
 

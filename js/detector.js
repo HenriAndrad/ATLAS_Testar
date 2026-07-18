@@ -1,4 +1,5 @@
 import * as ort from "onnxruntime-web";
+ort.env.wasm.wasmPaths = "/node_modules/onnxruntime-web/dist/";
 
 class DetectorManager {
 
@@ -27,26 +28,35 @@ class DetectorManager {
 
     async carregarClasses() {
 
-        const resposta = await fetch("./models/coco.names");
-        const texto = await resposta.text();
+    console.log("Carregando classes...");
 
-        this.classes = texto
-            .split("\n")
-            .map(item => item.trim())
-            .filter(Boolean);
+    const resposta = await fetch("./models/coco.names");
 
-    }
+    const texto = await resposta.text();
+
+    this.classes = texto
+        .split("\n")
+        .map(item => item.trim())
+        .filter(Boolean);
+
+    console.log("Classes carregadas.");
+
+}
 
     async carregarModelo() {
 
-        this.session = await ort.InferenceSession.create(
-            "./models/yolov8n.onnx",
-            {
-                executionProviders: ["wasm"]
-            }
-        );
+    console.log("Carregando modelo...");
 
-    }
+    this.session = await ort.InferenceSession.create(
+        "./models/yolov8n.onnx",
+        {
+            executionProviders: ["wasm"]
+        }
+    );
+
+    console.log("Modelo carregado.");
+
+}
 
     preprocessar() {
 

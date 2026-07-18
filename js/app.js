@@ -14,21 +14,12 @@ class VisualTranslator {
         this.translator = null;
         this.speech = null;
         this.ui = null;
+
         this.ultimoObjeto = "";
         this.ultimoInstante = 0;
         this.intervaloFala = 2000;
+
         this.overlay = document.getElementById("overlay");
-        const idioma = this.ui.getIdiomaSelecionado();
-
-this.translator.definirIdioma(idioma);
-this.speech.definirIdioma(idioma);
-
-this.ui.onTrocarIdioma((novoIdioma) => {
-
-    this.translator.definirIdioma(novoIdioma);
-    this.speech.definirIdioma(novoIdioma);
-
-});
 
     }
 
@@ -69,6 +60,28 @@ this.detector = await iniciarDetector(source);
 
             this.speech = iniciarSpeech();
 
+           const idioma = this.ui.getIdiomaSelecionado();
+
+this.translator.definirIdioma(idioma);
+this.speech.definirIdioma(idioma);
+
+this.ui.onTrocarIdioma((novoIdioma) => {
+
+    this.translator.definirIdioma(novoIdioma);
+    this.speech.definirIdioma(novoIdioma);
+
+});
+
+this.translator.definirIdioma(idioma);
+this.speech.definirIdioma(idioma);
+
+this.ui.onTrocarIdioma((novoIdioma) => {
+
+    this.translator.definirIdioma(novoIdioma);
+    this.speech.definirIdioma(novoIdioma);
+
+});
+
             this.ui.hideLoading();
 
             console.log("Aplicação iniciada com sucesso.");
@@ -79,11 +92,13 @@ this.detector = await iniciarDetector(source);
 
         catch (erro) {
 
-            console.error(erro);
+    console.error("===== ERRO AO INICIAR =====");
+    console.error(erro);
+    console.error(erro.stack);
 
-            alert("Erro ao iniciar a aplicação.");
+    alert(erro.message);
 
-        }
+}
 
     }
 
